@@ -20,6 +20,7 @@ const MONGODB_PASSWORD = encodeURIComponent(process.env.MONGODB_PASSWORD);
 const MONGODB_DBNAME = process.env.MONGODB_DBNAME;
 const MONGODB_URI = `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@cluster0.q83ut8c.mongodb.net/${MONGODB_DBNAME}?retryWrites=true&w=majority`;
 const shopRoute=require('./routes/shop_route')
+const authRoute = require('./routes/auth')
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -31,6 +32,7 @@ db.once('open', () => {
 });
 
 app.use('/shop',shopRoute)
+app.use('/login',authRoute)
 app.get('/', (req, res) => {
   res.render('index');
 });
