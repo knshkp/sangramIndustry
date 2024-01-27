@@ -12,7 +12,7 @@ const addProduct=async(data)=>{
     const result=await newProduct.save()
     return result;
 }
-modules.export={
+module.exports={
     addProduct
 
 }

@@ -1,4 +1,4 @@
-import * as shopServices from '../services/shop_services'
+const shopServices=require('../services/shop_services')
 const addProduct=async(req,res)=>{
     const cloudinaryUpload = await cloudinary.uploader.upload(req.file.path);
     try{
@@ -10,7 +10,7 @@ const addProduct=async(req,res)=>{
         res.status(400).send({success:false,msg:error.message})
     }
 }
-modules.export={
+module.exports={
     addProduct
 
 }

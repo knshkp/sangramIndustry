@@ -17,5 +17,5 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage: storage });
-product_route.post('/add_product', upload.single('productImage'), shopController.addProduct);
-module.exports=product_route;
+shop_route.post('/add_product', upload.single('productImage'), shopController.addProduct);
+module.exports=shop_route;
