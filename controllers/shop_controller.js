@@ -10,7 +10,28 @@ const addProduct=async(req,res)=>{
         res.status(400).send({success:false,msg:error.message})
     }
 }
+const getProduct = async (req, res) => {
+    try {
+        const result = await productService.getProduct();
+        res.status(200).send(result);
+    } catch (error) {
+        console.error("Error getting product:", error);
+        res.status(500).send({ success: false, msg: "Internal server error", data: [] });
+    }
+};
+
+const searchProduct = async (req, res) => {
+    try {
+        const result = await productService.searchProduct(req.body.search);
+        res.status(200).send(result);
+    } catch (error) {
+        console.error("Error searching product:", error);
+        res.status(500).send({ success: false, msg: "Internal server error", data: [] });
+    }
+};
 module.exports={
-    addProduct
+    addProduct,
+    getProduct,
+    searchProduct
 
 }

@@ -23,6 +23,18 @@ var productSchema = mongoose.Schema({
     },
     productImage:{
         type:String
+    },
+    is_dealerProducts:{
+        type:Number,
+        required:true
+    },
+    category_id:{
+        type:String,
+        required:true
+    },
+    product_count:{
+        type:String,
+        required:true
     }
 });
 
