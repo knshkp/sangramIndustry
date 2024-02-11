@@ -9,20 +9,24 @@ var vendorSchema = new mongoose.Schema({
     }
   },
   vendor_name: { 
-    type: String
+    type: String,
+    required: true
   },
   phone_number: { 
     type: Number,
-    unique: true 
+    unique: true,
+    required: true
   },
   vendor_type: { 
-    type: String 
+    type: String,
+    required: true
   },
   user_id: {
     type: Number
   },
   father_name: {
-    type: String
+    type: String,
+    required: true
   }
 },
 { timestamps: true });
