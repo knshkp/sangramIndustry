@@ -31,13 +31,8 @@ var userSchema = new mongoose.Schema({
   },
   user_type: { 
     type: String 
-  },
-  customers: { 
-    type: Array 
-  },
-  sub_customers: { 
-    type: Array 
   }
-});
+},
+{ timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

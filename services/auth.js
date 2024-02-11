@@ -1,7 +1,7 @@
 const User = require('../models/user');
 
 const userLogin=async(userData)=> {
-    const user = await User.findOne({ mobile_number : userData.phone });  
+    const user = await User.findOne({ phone : userData.phone });  
     if (!user) {
         const newDetails = new User({
             name : userData.name,
