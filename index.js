@@ -22,6 +22,8 @@ const MONGODB_URI = `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@clust
 const shopRoute=require('./routes/shop_route')
 const authRoute = require('./routes/auth')
 const vendorRoute = require('./routes/vendor')
+const buySellRoute=require('./routes/buy_sell_routes')
+const cartRoute=require('./routes/cart_route')
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -35,6 +37,8 @@ db.once('open', () => {
 app.use('/shop',shopRoute)
 app.use('/user',authRoute)
 app.use('/vendor',vendorRoute)
+app.use('/entry',buySellRoute)
+app.use('/cart',cartRoute)
 app.get('/', (req, res) => {
   res.render('index');
 });

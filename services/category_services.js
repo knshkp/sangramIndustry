@@ -1,15 +1,17 @@
 
-const Category = require('../models/Category'); // Assuming you have a Category model
+const Category = require('../models/category_model'); // Assuming you have a Category model
 const cloudinary = require('cloudinary').v2; // Assuming you have cloudinary configured
 
 const addCategory = async (categoryName, file) => {
     try {
+        console.log(`>>>>>>...ser>>>>>>>`,categoryName)
+        console.log(`>>>>>>...serImage>>>>>>>`,file)
         // Check if the category already exists
         const existingCategory = await Category.findOne({ category: categoryName.toLowerCase() });
 
-        if (existingCategory) {
-            return { success: true, msg: "This Category is already found" };
-        } else {
+        // if (existingCategory) {
+        //     return { success: true, msg: "This Category is already found" };
+        // } else {
             // Upload image to cloudinary
             const cloudinaryUpload = await cloudinary.uploader.upload(file.path);
 
@@ -23,7 +25,7 @@ const addCategory = async (categoryName, file) => {
             const cat_data = await category.save();
 
             return { success: true, msg: "Category Data", data: cat_data };
-        }
+        // }
     } catch (error) {
         throw new Error("Error adding category: " + error.message);
     }

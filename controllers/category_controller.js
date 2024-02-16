@@ -2,6 +2,7 @@ const categoryService = require('../services/category_services');
 
 const addCategory = async (req, res) => {
     try {
+        console.log(`>>>>>>>>>>>>>`,req.body.category)
         const result = await categoryService.addCategory(req.body.category, req.file);
         res.status(200).send(result);
     } catch (error) {

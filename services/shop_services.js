@@ -1,4 +1,6 @@
 const Product=require(`../models/product_model`)
+const cloudinary=require('cloudinary')
+const categoryController=require('../controllers/category_controller')
 const addProduct = async (productData, file) => {
     try {
         const cloudinaryUpload = await cloudinary.uploader.upload(file.path);
@@ -11,6 +13,7 @@ const addProduct = async (productData, file) => {
             category_id: productData.category_id,
             description: productData.description,
             is_dealerProducts:productData.is_dealerProducts,
+            dealer_price:productData.dealer_price
             
 
         });
