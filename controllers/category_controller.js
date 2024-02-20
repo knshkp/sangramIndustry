@@ -2,7 +2,8 @@ const categoryService = require('../services/category_services');
 
 const addCategory = async (req, res) => {
     try {
-        const result = await categoryService.addCategory(req.body.category, req.file);
+        console.log(`>>>>>>>>>>>>>`,req.body.category)
+        const result = await categoryService.addCategory(req.body.category);
         res.status(200).send(result);
     } catch (error) {
         console.error("Error adding category:", error);
@@ -18,6 +19,7 @@ const getCategory = async (req, res) => {
         res.status(400).send({ success: false, msg: "Error getting category", error: error.message });
     }
 };
+
 
 const getCategoryResult = async (req, res) => {
     try {
