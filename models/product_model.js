@@ -10,8 +10,7 @@ var productSchema = mongoose.Schema({
         required: true
     },
     dealer_price:{
-        type:Number,
-        required:true
+        type:Number
     },
     discount: {
         type: Number,
@@ -25,19 +24,12 @@ var productSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    productImage:{
-        type:String
-    },
     is_dealerProducts:{
         type:Number,
         required:true
     },
-    category_id:{
-        type:String,
-        required:true
-    },
     product_count:{
-        type:String,
+        type:Number,
         required:true
     }
 },

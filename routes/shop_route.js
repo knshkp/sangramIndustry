@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage: storage });
-shop_route.post('/add_category',upload.single('categoryImage'),categoryController.addCategory)
+shop_route.post('/add_category',categoryController.addCategory)
 shop_route.get('/get_category',categoryController.getCategoryResult)
 shop_route.post('/add_product', shopController.addProduct);
 shop_route.get('/get_product', shopController.getProduct);

@@ -1,4 +1,4 @@
-const Cart=require('../models/cartModel')
+const Cart=require('../models/cart_model')
 const addCart = async (req, res) => {
     try {
         const existingCartEntry = await Cart.findOne({
@@ -78,7 +78,9 @@ const getCart=async(req,res)=>{
         if(cart_data){
         const cartResult = {
             name: cart_data.product_name,
-            price:cart_data.price
+            price:cart_data.price,
+            quantity:cart_data.quantity,
+            customer_phone:cart_data.customer_phone
         };
     
           const response = {
