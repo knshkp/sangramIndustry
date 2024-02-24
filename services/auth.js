@@ -10,7 +10,10 @@ const userLogin=async(userData)=> {
             phone : userData.phone,
             address : userData.address,
             pan : userData.pan,
-            pincode : userData.pincode
+            pincode : userData.pincode,
+            user_id:userData.phone,
+            userId:userData.user_id,
+            user_id:userData.user_id
         }); await newDetails.save();
         return newDetails
     } else {

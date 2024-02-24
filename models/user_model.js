@@ -1,10 +1,13 @@
 var mongoose = require('mongoose');
 
 var userSchema = new mongoose.Schema({
+  userId: { 
+    type: Number, 
+    unique: true
+  },
   user_id: { 
     type: Number, 
-    unique: true, 
-    autoIncrement: true
+    unique: true
   },
   name: { 
     type: String, 
