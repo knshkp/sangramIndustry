@@ -11,28 +11,12 @@ const userLogin=async(userData)=> {
             address : userData.address,
             pan : userData.pan,
             pincode : userData.pincode,
-            user_id:userData.phone,
-            userId:userData.user_id,
-            user_id:userData.user_id
         }); await newDetails.save();
         return newDetails
     } else {
       return user
     }
 }
-
-// export async function userSignUp(userData) {
-//     const userDetails = new User({
-//         name : userData.name,
-//         dairy_name : userData.dairy_name,
-//         father_name : userData.father_name,
-//         mobile_number : userData.mobile_number,
-//         address : userData.address,
-//         pan : userData.pan,
-//         pincode : userData.pincode
-//     }); await userDetails.save();
-//     return userDetails
-// }
 module.exports={
     userLogin
 }
