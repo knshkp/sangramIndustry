@@ -1,9 +1,43 @@
 
 const Category = require('../models/category_model'); // Assuming you have a Category model
 const cloudinary = require('cloudinary').v2; // Assuming you have cloudinary configured
-
-const addCategory = async (category) => {
+cloudinary.config({
+    cloud_name: "dyukjqemj",
+    api_key: "975334944781146",
+    api_secret: "USmTRR4C6ly_RDh-82Y8rhMIMzc",
+  });
+  const addCategory = async (category, categoryImage, bannerImage) => {
     try {
+        const categoryUploadPromise = new Promise((resolve, reject) => {
+            const categoryStream = cloudinary.uploader.upload_stream({ resource_type: 'image' }, (error, result) => {
+                if (error) {
+                    reject(new Error("Error uploading category image to Cloudinary: " + error.message));
+                } else {
+                    resolve(result);
+                }
+            });
+
+            categoryStream.end(categoryImage.buffer);
+        });
+
+        const bannerUploadPromise = new Promise((resolve, reject) => {
+            const bannerStream = cloudinary.uploader.upload_stream({ resource_type: 'image' }, (error, result) => {
+                if (error) {
+                    reject(new Error("Error uploading banner image to Cloudinary: " + error.message));
+                } else {
+                    resolve(result);
+                }
+            });
+
+            bannerStream.end(bannerImage.buffer);
+        });
+
+        // Wait for both uploads to complete
+        const [categoryResult, bannerResult] = await Promise.all([categoryUploadPromise, bannerUploadPromise]);
+
+        // Extract secure URLs for category and banner images
+        const categoryImageUrl = categoryResult.secure_url;
+        const bannerImageUrl = bannerResult.secure_url;
 
         // Check if the category already exists
         const existingCategory = await Category.findOne({ category: category.toLowerCase() });
@@ -11,24 +45,25 @@ const addCategory = async (category) => {
         if (existingCategory) {
             return { success: true, msg: "This Category is already found" };
         } else {
-            // Upload image to cloudinary
-            console.log(`>>>>>>>>ser2>>>>`)
-
             // Create a new category
-            const categorys = new Category({
-                category: category.toLowerCase()
+            const newCategory = new Category({
+                category: category.toLowerCase(),
+                categoryImage: categoryImageUrl,
+                bannerImage: bannerImageUrl,
             });
-            console.log(`>>>>>>>>>>ser1>>>>>>>>>`, categorys)
 
             // Save the new category
-            const cat_data = await categorys.save();
+            const savedCategory = await newCategory.save();
 
-            return { success: true, msg: "Category Data", data: cat_data };
+            return { success: true, msg: "Category Data", data: savedCategory };
         }
     } catch (error) {
         throw new Error("Error adding category: " + error.message);
     }
 };
+
+
+
 
 const getCategory = async () => {
     try {

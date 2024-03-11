@@ -1,25 +1,51 @@
-const express=require("express")
-const shop_route=express()
-const multer=require("multer")
+const express = require("express");
+const shop_route = express();
+const multer = require("multer");
 const path = require("path");
-const bodyParser=require("body-parser")
-shop_route.use(bodyParser.json())
+const bodyParser = require("body-parser");
+const shopController = require('../controllers/shop_controller');
+const categoryController = require('../controllers/category_controller');
+
+shop_route.use(bodyParser.json());
 shop_route.use(bodyParser.urlencoded({ extended: true }));
 shop_route.use(express.static('public'));
-const shopController=require('../controllers/shop_controller')
-const categoryController=require('../controllers/category_controller')
-const storage = multer.diskStorage({
+
+// Set up multer storage for category image
+const categoryImageStorage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, path.join(__dirname, '../public/categoryImages'));
     },
     filename: function (req, file, cb) {
-        const name = Date.now() + '-' + file.originalname;
+        const name = 'category-' + Date.now() + '-' + file.originalname;
         cb(null, name);
     }
 });
-const upload = multer({ storage: storage });
-shop_route.post('/add_category',categoryController.addCategory)
-shop_route.get('/get_category',categoryController.getCategoryResult)
+
+// Set up multer storage for banner image
+const bannerImageStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, '../public/bannerImages'));
+    },
+    filename: function (req, file, cb) {
+        const name = 'banner-' + Date.now() + '-' + file.originalname;
+        cb(null, name);
+    }
+});
+
+// Configure multer to handle multiple file uploads
+const upload = multer({
+    storage: multer.memoryStorage(),
+});
+
+shop_route.post('/add_category', upload.fields([
+    { name: 'categoryImage', maxCount: 1 },
+    { name: 'bannerImage', maxCount: 1 }
+]), categoryController.addCategory);
+
+shop_route.get('/get_category', categoryController.getCategoryResult);
+shop_route.post('/add_banner', upload.single('bannerImage'),shopController.addBanner);
+shop_route.get('/get_banner', categoryController.getCategoryResult);
 shop_route.post('/add_product', shopController.addProduct);
 shop_route.get('/get_product', shopController.getProduct);
-module.exports=shop_route;
+
+module.exports = shop_route;

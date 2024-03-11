@@ -4,9 +4,6 @@ const categoryController=require('../controllers/category_controller')
 const categoryService=require('../services/category_services')
 const addProduct = async (productData) => {
     try {
-        console.log(`>>>>>>>>>>>>>>`,productData)
-        // const cloudinaryUpload = await cloudinary.uploader.upload(file.path);
-
         const product = new Product({
             name: productData.name,
             price: productData.price,
@@ -20,7 +17,6 @@ const addProduct = async (productData) => {
             
 
         });
-        console.log(product)
 
         return await product.save();
     } catch (error) {
