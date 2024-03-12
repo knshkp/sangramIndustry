@@ -31,11 +31,21 @@ const bannerImageStorage = multer.diskStorage({
         cb(null, name);
     }
 });
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, '../public/categoryImages'));
+    },
+    filename: function (req, file, cb) {
+        const name = Date.now() + '-' + file.originalname;
+        cb(null, name);
+    }
+});
 
 // Configure multer to handle multiple file uploads
 const upload = multer({
-    storage: multer.memoryStorage(),
+    storage: multer.memoryStorage()
 });
+const uploads = multer({ storage: storage });
 
 shop_route.post('/add_category', upload.fields([
     { name: 'categoryImage', maxCount: 1 },
@@ -43,9 +53,10 @@ shop_route.post('/add_category', upload.fields([
 ]), categoryController.addCategory);
 
 shop_route.get('/get_category', categoryController.getCategoryResult);
-shop_route.post('/add_banner', upload.single('bannerImage'),shopController.addBanner);
-shop_route.get('/get_banner', categoryController.getCategoryResult);
-shop_route.post('/add_product', shopController.addProduct);
+shop_route.post('/add_banner', uploads.single('bannerImage'),shopController.addBanner);
+shop_route.get('/remove_banner',shopController.removeBanner);
+shop_route.get('/get_banner',shopController.getBanner);
+shop_route.post('/add_product',uploads.single('productImage'), shopController.addProduct);
 shop_route.get('/get_product', shopController.getProduct);
 
 module.exports = shop_route;

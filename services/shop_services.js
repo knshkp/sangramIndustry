@@ -2,12 +2,12 @@ const Product=require(`../models/product_model`)
 const cloudinary=require('cloudinary')
 const categoryController=require('../controllers/category_controller')
 const categoryService=require('../services/category_services')
-const addProduct = async (productData) => {
+const addProduct = async (productData,image) => {
     try {
         const product = new Product({
             name: productData.name,
             price: productData.price,
-            // productImage: cloudinaryUpload.secure_url,
+            productImage: image,
             discount: productData.discount,
             category_id: productData.category_id,
             description: productData.description,
