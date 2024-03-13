@@ -48,6 +48,7 @@ const getProduct = async () => {
                 send_data.push({
                     "category": cat_data[i]['category'],
                     "categoryImage": cat_data[i]['categoryImage'],
+                    "bannerImage":cat_data[i]['bannerImage'],
                     "product": product_data,
                 });
             }
