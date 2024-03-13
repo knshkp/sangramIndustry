@@ -73,7 +73,7 @@ const removeCart = async (req, res) => {
 };
 const getCart=async(req,res)=>{
     try {
-        const phone=req.body.phone;
+        const phone=req.query.phone;
         const cart_data = await Cart.findOne({customer_phone:phone});
         if(cart_data){
         const cartResult = {
