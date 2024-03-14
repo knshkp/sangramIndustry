@@ -50,6 +50,7 @@ const getProduct = async () => {
                     "categoryImage": cat_data[i]['categoryImage'],
                     "bannerImage":cat_data[i]['bannerImage'],
                     "product": product_data,
+                    
                 });
             }
             return { success: true, msg: "Product Details", data: send_data };
