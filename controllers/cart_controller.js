@@ -3,7 +3,7 @@ const addCart = async (req, res) => {
     try {
         const existingCartEntry = await Cart.findOne({
             customer_phone: req.body.phone,
-            product_name: req.body.product_name,
+            product_name: req.body.product_name
         });
 
         if (existingCartEntry) {
@@ -73,8 +73,9 @@ const removeCart = async (req, res) => {
 };
 const getCart=async(req,res)=>{
     try {
-        const phone=req.body.phone;
-        const cart_data = await Cart.findOne({customer_phone:phone});
+        const phone=req.query.phone;
+        const cart_data = await Cart.find({customer_phone:phone});
+        console.log(cart_data)
         if(cart_data){
         const cartResult = {
             name: cart_data.product_name,
@@ -86,7 +87,7 @@ const getCart=async(req,res)=>{
           const response = {
             success: true,
             msg: "BuyDetail",
-            data: cartResult,
+            data: cart_data,
           };
           res.status(200).send(response);
         }

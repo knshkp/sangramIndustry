@@ -2,15 +2,12 @@ const Product=require(`../models/product_model`)
 const cloudinary=require('cloudinary')
 const categoryController=require('../controllers/category_controller')
 const categoryService=require('../services/category_services')
-const addProduct = async (productData) => {
+const addProduct = async (productData,image) => {
     try {
-        console.log(`>>>>>>>>>>>>>>`,productData)
-        // const cloudinaryUpload = await cloudinary.uploader.upload(file.path);
-
         const product = new Product({
             name: productData.name,
             price: productData.price,
-            // productImage: cloudinaryUpload.secure_url,
+            productImage: image,
             discount: productData.discount,
             category_id: productData.category_id,
             description: productData.description,
@@ -20,7 +17,6 @@ const addProduct = async (productData) => {
             
 
         });
-        console.log(product)
 
         return await product.save();
     } catch (error) {
@@ -52,7 +48,9 @@ const getProduct = async () => {
                 send_data.push({
                     "category": cat_data[i]['category'],
                     "categoryImage": cat_data[i]['categoryImage'],
+                    "bannerImage":cat_data[i]['bannerImage'],
                     "product": product_data,
+                    
                 });
             }
             return { success: true, msg: "Product Details", data: send_data };

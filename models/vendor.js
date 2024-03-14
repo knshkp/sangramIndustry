@@ -1,13 +1,6 @@
 var mongoose = require('mongoose');
 
 var vendorSchema = new mongoose.Schema({
-  vendor_id: { 
-    type: Number, 
-    unique: true, 
-    autoIncrement: {
-      startAt: 1
-    }
-  },
   vendor_name: { 
     type: String,
     required: true
@@ -31,4 +24,4 @@ var vendorSchema = new mongoose.Schema({
 },
 { timestamps: true });
 
-module.exports = mongoose.model('vendor', vendorSchema);
+module.exports = mongoose.model('vendord', vendorSchema);
