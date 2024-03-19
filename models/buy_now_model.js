@@ -1,25 +1,20 @@
-const mongoose=require("mongoose")
-const cartSchema=mongoose.Schema({
-    customer_phone:{
-        type:Number,
-        required:true
+const mongoose = require("mongoose");
+const cartSchema = new mongoose.Schema({
+    productArray: {
+        type: Array,
+        required: true
     },
-    product_name:{
-        type:String,
-        required:true
+    totalAmount: {
+        type: Number,
+        required: true
     },
-    price:{
-        type:Number,
-        required:true
+    phone: {
+        type: Number,
+        required: true
     },
-    quantity:{
-        type:Number,
-        required:true
-    },
-    address:{
-        type:String,
-        required:true
+    address: {
+        type: String,
+        required: true
     }
-
 });
-module.exports=mongoose.model("BuyProduct",cartSchema);
+module.exports = mongoose.model("Buy", cartSchema);
