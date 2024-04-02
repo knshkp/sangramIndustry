@@ -4,10 +4,6 @@ const addCategory = async (req, res) => {
     try {
         const categoryImage = req.files['categoryImage'][0];
         const bannerImage = req.files['bannerImage'][0];
-
-        console.log(`>>>>>`, categoryImage);
-        console.log(`>>>>>`, bannerImage);
-
         const result = await categoryService.addCategory(req.body.category, categoryImage, bannerImage);
         res.status(200).send(result);
     } catch (error) {
