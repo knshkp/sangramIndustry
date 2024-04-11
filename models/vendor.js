@@ -2,13 +2,16 @@ var mongoose = require('mongoose');
 
 var vendorSchema = new mongoose.Schema({
   vendor_name: { 
-    type: String
+    type: String,
+    required: true
   },
   phone_number: { 
-    type: Number
+    type: Number,
+    unique:true
   },
   vendor_type: { 
-    type: String 
+    type: String,
+    required: true
   },
   user_id: {
     type: Number
