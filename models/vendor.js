@@ -5,8 +5,7 @@ var vendorSchema = new mongoose.Schema({
     type: String
   },
   phone_number: { 
-    type: Number,
-    unique: true 
+    type: Number
   },
   vendor_type: { 
     type: String 
@@ -16,6 +15,9 @@ var vendorSchema = new mongoose.Schema({
   },
   father_name: {
     type: String
+  },
+  seller_phone:{
+    type:Number
   }
 },
 { timestamps: true });
