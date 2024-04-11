@@ -8,7 +8,8 @@ const addVendor=async(data)=> {
             phone_number : data.phone_number,
             vendor_type : data.vendor_type,
             father_name : data.father_name,
-            user_id : data.user_id
+            user_id : data.user_id,
+            seller_phone:data.seller_phone,
         }); await newVendorDetails.save();
         return newVendorDetails
     } else {
@@ -17,7 +18,7 @@ const addVendor=async(data)=> {
 }
 
 const getVendorDetails=async(userId)=> {
-    const vendorData = await Vendor.find({ user_id : userId });
+    const vendorData = await Vendor.find({ seller_phone : userId });
     return vendorData
 }
 

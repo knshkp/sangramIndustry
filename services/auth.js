@@ -11,6 +11,7 @@ const userLogin=async(userData)=> {
             address : userData.address,
             pan : userData.pan,
             pincode : userData.pincode,
+            dairy_type:userData.dairy_type
         }); await newDetails.save();
         return newDetails
     } else {

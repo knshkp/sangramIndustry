@@ -13,7 +13,7 @@ const addVendor=async(req, res)=> {
 
 const getVendorDetails=async(req, res)=> {
     try {
-        const userId = req.params.user_id;
+        const userId = req.query.phone;
         const getVendorDetails = await VendorServices.getVendorDetails(userId);
         return res.status(200).json({msg : 'All Vendors Details Shown Successfully', result : getVendorDetails});
     } catch (error) {
