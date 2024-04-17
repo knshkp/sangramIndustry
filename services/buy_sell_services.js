@@ -27,25 +27,14 @@ const addSellEntry=async(data)=> {
     await newDetails.save();
     return newDetails
 }
-const getSellEntry = async (date) => {
-    try {
-      const sellEntry = await SellSchema.find({date:createdAt});
-  
-      // If no wallets found, return a 404 response
-      if (!sellEntry || sellEntry.length === 0) {
-        return res.status(404).json({ error: 'Entry not found' });
-      }
-  
-      
-  
-      // Send wallet data as a response
-      res.status(200).json({ result: sellEntry });
-    } 
-    catch (error) {
-      console.error('Error getting Sell Entry:', error);
-      res.status(500).json({ error: 'Getting Sell Entry Error' });
+
+  const getSellEntry = async(data) => {
+    const sellEntry = await SellSchema.find({phone:data.phone});
+    if (!sellEntry || sellEntry.length === 0) {
+      return "not found";
     }
-  };
+    return sellEntry
+};
 const getBuyEntry = async(data) => {
       const buyEntry = await BuySchema.find({phone:data.phone});
       if (!buyEntry || buyEntry.length === 0) {
