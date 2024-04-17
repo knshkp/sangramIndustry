@@ -7,7 +7,7 @@ const addProduct = async (productData,image) => {
         const product = new Product({
             name: productData.name,
             price: productData.price,
-            productImage: image,
+            product_image: image,
             discount: productData.discount,
             category_id: productData.category_id,
             description: productData.description,
