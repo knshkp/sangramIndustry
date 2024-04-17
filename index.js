@@ -14,7 +14,6 @@ cloudinary.config({
   api_secret: process.env.cloudinary_api_secret,
 });
 
-// MongoDB Connection
 const MONGODB_USERNAME = encodeURIComponent(process.env.MONGODB_USERNAME);
 const MONGODB_PASSWORD = encodeURIComponent(process.env.MONGODB_PASSWORD);
 const MONGODB_DBNAME = process.env.MONGODB_DBNAME;
