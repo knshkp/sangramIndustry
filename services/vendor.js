@@ -1,8 +1,7 @@
 const Vendor = require('../models/vendor');
 
 const addVendor=async(data)=> {
-    const addVendor = await Vendor.findOne({ phone_number : data.phone_number }); 
-    if (!addVendor) {
+
         const newVendorDetails = new Vendor({
             vendor_name : data.vendor_name,
             phone_number : data.phone_number,
@@ -12,9 +11,6 @@ const addVendor=async(data)=> {
             seller_phone:data.seller_phone,
         }); await newVendorDetails.save();
         return newVendorDetails
-    } else {
-      return addVendor
-    }
 }
 
 const getVendorDetails=async(userId)=> {
