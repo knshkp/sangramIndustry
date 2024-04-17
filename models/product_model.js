@@ -31,6 +31,10 @@ var productSchema = mongoose.Schema({
     product_count:{
         type:Number,
         required:true
+    },
+    product_image:{
+        type:String,
+        required:true
     }
 },
 { timestamps: true });
