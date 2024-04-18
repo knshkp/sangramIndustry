@@ -14,8 +14,6 @@ const addProduct = async (productData,image) => {
             is_dealerProducts:productData.is_dealerProducts,
             dealer_price:productData.dealer_price,
             product_count:productData.product_count
-            
-
         });
 
         return await product.save();
@@ -41,7 +39,7 @@ const getProduct = async () => {
                             "product_price": cat_pro[j]['price'],
                             "discount": cat_pro[j]['discount'],
                             "description": cat_pro[j]['description'],
-                            "productImage": cat_pro[j]['productImage']
+                            "productImage": cat_pro[j]['product_image']
                         });
                     }
                 }
