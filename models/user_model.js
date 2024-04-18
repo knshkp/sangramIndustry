@@ -6,26 +6,36 @@ var userSchema = new mongoose.Schema({
     required: true 
   },
   dairy_name: { 
-    type: String 
+    type: String,
+    required:true
   },
   father_name: { 
-    type: String 
+    type: String,
+    required:true 
   },
   phone: { 
     type: String, 
-    unique: true 
+    unique: true ,
+    required:true
   },
   address: { 
-    type: String 
+    type: String,
+    required:true, 
   },
   pan: { 
-    type: String 
+    type: String, 
+    required:true
   },
   pincode: { 
-    type: Number 
+    type: Number,
+    required:true 
   },
   user_type: { 
-    type: String 
+    type: String
+  },
+  dairy_type:{
+    type:String,
+    required:true
   },
   customers: { 
     type: Array 
