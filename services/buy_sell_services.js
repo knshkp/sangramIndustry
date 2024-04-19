@@ -43,57 +43,101 @@ const getBuyEntry = async(data) => {
       return buyEntry
   };
 const getDailyReport=async(data)=>{
-  console.log(`>>>>>>>>>>>>>>>>`,data)
     const phone=data.phone;
     const fromDate=data.from_date;
     const toDate=data.to_date;
     const shift=data.shift;
     const type=data.type;
+    const customer_id=data.customer_id
     let dailyEntry=''
     let buyEntry=''
     let sellEntry=''
     const nextDay = new Date(toDate);
     nextDay.setDate(nextDay.getDate() + 1);
     if(type==2){
-      console.log(`>>>>>>>>>>>>.`)
       if(shift==2){
-        console.log(`>>>>>>>>>>>`)
-        buyEntry=await BuySchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone});
-        sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone});
-        console.log(`>>>>>>>>>>>>>>${buyEntry}`)
-        console.log(`>>>>>>>>>>>>>>>${sellEntry}`)
+        if(customer_id!==''){
+          buyEntry=await BuySchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,customer_id:customer_id});
+          sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,customer_id:customer_id});
+        }
+        else{
+          buyEntry=await BuySchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone});
+          sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone});
+        }
       }
       else if(shift==1){
-        buyEntry=await BuySchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:1});
-        sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:1});
+        if(customer_id!==''){
+          buyEntry=await BuySchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:1,customer_id:customer_id});
+          sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:1,customer_id:customer_id});
+        }
+        else{
+          buyEntry=await BuySchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:1});
+          sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:1});
+        }
       }
       else{
-        buyEntry=await BuySchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:0});
-        sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:0});
+        if(customer_id!==''){
+          buyEntry=await BuySchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:0,customer_id:customer_id});
+          sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:0,customer_id:customer_id});
+        }
+        else{
+          buyEntry=await BuySchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:0});
+          sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:0});
+        }
       }
       dailyEntry=[buyEntry,sellEntry] 
     }
     else if(type==0){
       if(shift==2){
-        buyEntry=await BuySchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone});
+        if(customer_id!==''){
+          buyEntry=await BuySchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,customer_id:customer_id});
+        }
+        else{
+          buyEntry=await BuySchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone});
+        }
       }
       else if(shift==1){
+        if(customer_id!==''){
+          buyEntry=await BuySchema.find({created_at: {$gte: fromDate,$lte: nextDay},phone:phone,shift:1,customer_id:customer_id});
+        }
+        else{
         buyEntry=await BuySchema.find({created_at: {$gte: fromDate,$lte: nextDay},phone:phone,shift:1});
+        }
       }
       else{
-        buyEntry=await BuySchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:0});
+        if(customer_id!==''){
+          buyEntry=await BuySchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:0,customer_id:customer_id});
+        }
+        else{
+          buyEntry=await BuySchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:0});
+        }
       }
       dailyEntry=buyEntry
     }
     else{
       if(shift==2){
-        sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay},phone:phone});
+        if(customer_id!==''){
+          sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay},phone:phone,customer_id:customer_id});
+        }
+        else{
+          sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay},phone:phone});
+        }
       }
       else if(shift==1){
-        sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:1});
+        if(customer_id!==''){
+          sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:1});
+        }
+        else{
+          sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:1});
+        }
       }
       else{
-        sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:0});
+        if(customer_id!==''){
+          sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:0,customer_id:customer_id});
+        }
+        else{
+          sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:0});
+        }
       }
       dailyEntry=sellEntry
     }
