@@ -14,7 +14,7 @@ const SellSchema = mongoose.Schema({
     },
     created_at:{
         type:Date,
-        default:Date.now
+        default: () => new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }) // Convert to IST
     },
     milk_type:{
         type:String
