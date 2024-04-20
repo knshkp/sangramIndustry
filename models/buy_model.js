@@ -1,35 +1,37 @@
 const mongoose = require("mongoose");
+
 const BuySchema = mongoose.Schema({
-    phone:{
-        type:String,
-        required:true
+    phone: {
+        type: String,
+        required: true
     },
-    customer_id:{
-        type:String,
-        required:true
+    customer_id: {
+        type: String,
+        required: true
     },
-    customer_name:{
-        type:String,
-        required:true
+    customer_name: {
+        type: String,
+        required: true
     },
-    quantity:{
-        type:String,
-        required:true
+    quantity: {
+        type: String,
+        required: true
     },
-    created_at:{
-        type:Date,
-        default:Date.now
+    created_at: {
+        type: Date,
+        default: () => new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" }) // Convert to IST
     },
-    milk_type:{
-        type:String
+    milk_type: {
+        type: String
     },
-    shift:{
-        type:Number,
-        required:true
+    shift: {
+        type: Number,
+        required: true
     },
-    price:{
-        type:Number,
-        required:true
+    price: {
+        type: Number,
+        required: true
     }
 });
-module.exports=mongoose.model("buy",BuySchema)
+
+module.exports = mongoose.model("buy", BuySchema);
