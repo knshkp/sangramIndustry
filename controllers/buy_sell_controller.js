@@ -43,11 +43,6 @@ const getBuyEntry=async(req, res)=> {
 }
 const getDailyReport=async(req, res)=> {
     try {
-        // const phone=req.query.phone;
-        // const fromDate=req.query.from_date;
-        // const toDate=req.query.to_date;
-        // const type=req.query.type;
-        // const shift=req.query.shift;
         const data=req.query;
         const entry = await BuySellServices.getDailyReport(data);
         return res.status(200).json({msg : 'Getting Daily Report Sucessfull', result : entry});
