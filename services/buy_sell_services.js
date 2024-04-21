@@ -112,7 +112,7 @@ const getDailyReport=async(data)=>{
           buyEntry=await BuySchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:0});
         }
       }
-      dailyEntry=buyEntry
+      dailyEntry=[buyEntry]
     }
     else{
       if(shift==2){
@@ -139,7 +139,7 @@ const getDailyReport=async(data)=>{
           sellEntry=await SellSchema.find({created_at: {$gte: fromDate,$lte: nextDay },phone:phone,shift:0});
         }
       }
-      dailyEntry=sellEntry
+      dailyEntry=[sellEntry]
     }
   
     if(!dailyEntry||dailyEntry.length===0){
