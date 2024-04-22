@@ -31,6 +31,10 @@ const BuySchema = mongoose.Schema({
     price: {
         type: Number,
         required: true
+    },
+    fat_amount:{
+        type:Number,
+        required:true
     }
 });
 

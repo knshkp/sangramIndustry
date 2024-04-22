@@ -26,6 +26,10 @@ const SellSchema = mongoose.Schema({
     shift:{
         type:Number,
         required:true
+    },
+    fat_amount:{
+        type:Number,
+        required:true
     }
 });
 module.exports=mongoose.model("sell",SellSchema)

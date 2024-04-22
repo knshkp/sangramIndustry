@@ -10,7 +10,8 @@ const addBuyEntry=async(data)=> {
         quantity : data.quantity,
         milk_type : data.type,
         price : data.price,
-        shift:data.shift
+        shift:data.shift,
+        fat_amount:data.fat_amount
     }); await newDetails.save();
     return newDetails
 }
@@ -22,7 +23,8 @@ const addSellEntry=async(data)=> {
         quantity : data.quantity,
         milk_type : data.type,
         price : data.price,
-        shift:data.shift
+        shift:data.shift,
+        fat_amount:data.fat_amount
     });
     await newDetails.save();
     return newDetails
