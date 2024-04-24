@@ -30,6 +30,10 @@ const SellSchema = mongoose.Schema({
     fat_amount:{
         type:Number,
         required:true
+    },
+    customer_id:{
+        type:String,
+        required:true
     }
 });
 module.exports=mongoose.model("sell",SellSchema)
