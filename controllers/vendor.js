@@ -30,6 +30,24 @@ const removeVendor = async (req, res) => {
         return res.status(500).json({ message: 'Failed to remove vendor' });
     }
 };
+const loginVendor=async(req,res)=>{
+    try{
+        const phone=req.body.phone
+        const vendor=await VendorServices.loginVendor(phone)
+        if(vendor){
+            return res.status(200).json({msg : 'Vendors Details', result : vendor});
+        }
+        else{
+            return res.status(401).send("Vendor Detail not found")
+        }
+    }
+    catch(error){
+        console.error('Error in getting vendor:', error);
+        return res.status(500).json({ message: 'Failed to login vendors ' });
+
+
+    }
+}
 
 
 const getVendorDetails=async(req, res)=> {
@@ -44,5 +62,5 @@ const getVendorDetails=async(req, res)=> {
 }
 
 module.exports={
-    addVendor, getVendorDetails,removeVendor
+    addVendor, getVendorDetails,removeVendor,loginVendor
 }
