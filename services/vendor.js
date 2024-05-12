@@ -34,6 +34,13 @@ const addVendor = async (data) => {
         throw error; // Re-throw the error to be handled by the caller
     }
 };
+const loginVendor=async(phone)=>{
+    const vendorDetials=await Vendor.find({phone:phone})
+    if (!vendorDetials){
+        throw new Error(`Vendor with Phone ${phone} not found`);
+    }
+    return vendorDetials
+}
 
 const removeVendor = async (vendorId) => {
     try {
@@ -64,5 +71,5 @@ const getVendorDetails=async(userId)=> {
 }
 
 module.exports={
-    addVendor, getVendorDetails,removeVendor
+    addVendor, getVendorDetails,removeVendor,loginVendor
 }
