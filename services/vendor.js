@@ -35,7 +35,7 @@ const addVendor = async (data) => {
     }
 };
 const loginVendor=async(phone)=>{
-    const vendorDetials=await Vendor.find({phone:phone})
+    const vendorDetials=await Vendor.find({phone_number:phone})
     if (!vendorDetials){
         throw new Error(`Vendor with Phone ${phone} not found`);
     }
