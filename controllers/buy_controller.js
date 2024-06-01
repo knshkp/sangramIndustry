@@ -22,7 +22,7 @@ const Cart=require('../models/cart_model')
     
             // Remove the product(s) from the cart
             for (const product of productArray) {
-                await Cart.findOneAndDelete({ productId: product.productId, userId: req.user.id });
+                await Cart.findOneAndDelete({ product_name: product.product_name, customer_phone: phone });
             }
     
             res.status(201).json({ message: "Product added to buy successfully and removed from cart" });
