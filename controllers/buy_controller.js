@@ -1,30 +1,36 @@
 const Buy=require('../models/buy_now_model')
-const addProduct = async (req, res) => {
-    try {
-        const { productArray, totalAmount, phone, address } = req.body;
-
-        // Validate required fields
-        if (!productArray || !totalAmount || !phone || !address) {
-            return res.status(400).json({ message: "All fields are required" });
+const Cart=require('../models/cart_model')
+    const addProduct = async (req, res) => {
+        try {
+            const { productArray, totalAmount, phone, address } = req.body;
+    
+            // Validate required fields
+            if (!productArray || !totalAmount || !phone || !address) {
+                return res.status(400).json({ message: "All fields are required" });
+            }
+    
+            // Create a new Buy document
+            const newBuy = new Buy({
+                productArray,
+                totalAmount,
+                phone,
+                address
+            });
+    
+            // Save the Buy document
+            await newBuy.save();
+    
+            // Remove the product(s) from the cart
+            for (const product of productArray) {
+                await Cart.findOneAndDelete({ productId: product.productId, userId: req.user.id });
+            }
+    
+            res.status(201).json({ message: "Product added to buy successfully and removed from cart" });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Internal server error" });
         }
-
-        // Create a new Buy document
-        const newBuy = new Buy({
-            productArray,
-            totalAmount,
-            phone,
-            address
-        });
-
-        // Save the Buy document
-        await newBuy.save();
-
-        res.status(201).json({ message: "Product added to buy successfully" });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-};
+    };
 
 const getProduct=async(req,res)=>{
     try {
