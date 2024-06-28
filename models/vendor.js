@@ -18,6 +18,21 @@ var vendorSchema = new mongoose.Schema({
   },
   seller_phone:{
     type:Number
+  },
+  address:{
+    type:String
+  },
+  city:{
+    type:String
+  },
+  state:{
+    type:String
+  },
+  pincode:{
+    type:String
+  },
+  upi:{
+    type:String
   }
 },
 { timestamps: true });
