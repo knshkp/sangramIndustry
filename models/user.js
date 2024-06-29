@@ -31,6 +31,9 @@ var userSchema = new mongoose.Schema({
   },
   user_type: { 
     type: String 
+  },
+  dairy_type:{
+    type:String,
   }
 },
 { timestamps: true });

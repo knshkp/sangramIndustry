@@ -1,18 +1,19 @@
 const Product=require(`../models/product_model`)
-const addProduct = async (productData, file) => {
+const cloudinary=require('cloudinary')
+const categoryController=require('../controllers/category_controller')
+const categoryService=require('../services/category_services')
+const addProduct = async (productData,image) => {
     try {
-        const cloudinaryUpload = await cloudinary.uploader.upload(file.path);
-
         const product = new Product({
             name: productData.name,
             price: productData.price,
-            productImage: cloudinaryUpload.secure_url,
+            product_image: image,
             discount: productData.discount,
             category_id: productData.category_id,
             description: productData.description,
             is_dealerProducts:productData.is_dealerProducts,
-            
-
+            dealer_price:productData.dealer_price,
+            product_count:productData.product_count
         });
 
         return await product.save();
@@ -23,7 +24,7 @@ const addProduct = async (productData, file) => {
 const getProduct = async () => {
     try {
         const send_data = [];
-        const cat_data = await categoryController.getCategory();
+        const cat_data = await categoryService.getCategory();
 
         if (cat_data.length > 0) {
             for (let i = 0; i < cat_data.length; i++) {
@@ -38,14 +39,16 @@ const getProduct = async () => {
                             "product_price": cat_pro[j]['price'],
                             "discount": cat_pro[j]['discount'],
                             "description": cat_pro[j]['description'],
-                            "productImage": cat_pro[j]['productImage']
+                            "productImage": cat_pro[j]['product_image']
                         });
                     }
                 }
                 send_data.push({
                     "category": cat_data[i]['category'],
                     "categoryImage": cat_data[i]['categoryImage'],
+                    "bannerImage":cat_data[i]['bannerImage'],
                     "product": product_data,
+                    
                 });
             }
             return { success: true, msg: "Product Details", data: send_data };

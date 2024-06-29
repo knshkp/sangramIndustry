@@ -3,7 +3,9 @@ const router = express.Router();
 const VendorControllers = require('../controllers/vendor')
 
 router.post('/addVendor', VendorControllers.addVendor)
+router.post('/loginVendor', VendorControllers.loginVendor)
 
-router.get('/user_id/:user_id/get_vendor_details', VendorControllers.getVendorDetails)
+router.get(`/getVendor`, VendorControllers.getVendorDetails)
+router.get(`/removeVendor`, VendorControllers.removeVendor)
 
 module.exports = router;

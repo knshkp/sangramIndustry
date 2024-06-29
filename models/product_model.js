@@ -9,6 +9,9 @@ var productSchema = mongoose.Schema({
         type: Number,
         required: true
     },
+    dealer_price:{
+        type:Number
+    },
     discount: {
         type: Number,
         required: true
@@ -21,18 +24,15 @@ var productSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    productImage:{
-        type:String
-    },
     is_dealerProducts:{
         type:Number,
         required:true
     },
-    category_id:{
-        type:String,
+    product_count:{
+        type:Number,
         required:true
     },
-    product_count:{
+    product_image:{
         type:String,
         required:true
     }

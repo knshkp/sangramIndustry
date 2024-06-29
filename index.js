@@ -14,14 +14,17 @@ cloudinary.config({
   api_secret: process.env.cloudinary_api_secret,
 });
 
-// MongoDB Connection
 const MONGODB_USERNAME = encodeURIComponent(process.env.MONGODB_USERNAME);
 const MONGODB_PASSWORD = encodeURIComponent(process.env.MONGODB_PASSWORD);
 const MONGODB_DBNAME = process.env.MONGODB_DBNAME;
-const MONGODB_URI = `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@cluster0.kuo0csq.mongodb.net/${MONGODB_DBNAME}?retryWrites=true&w=majority`;
+const MONGODB_URI = `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@cluster0.zl5jwix.mongodb.net/${MONGODB_DBNAME}?retryWrites=true&w=majority`;
 const shopRoute=require('./routes/shop_route')
 const authRoute = require('./routes/auth')
 const vendorRoute = require('./routes/vendor')
+const buySellRoute=require('./routes/buy_sell_routes')
+const cartRoute=require('./routes/cart_route')
+const buyProductRoute=require('./routes/buy_product_routes')
+const rateRoute=require('./routes/rate_routes')
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -35,6 +38,10 @@ db.once('open', () => {
 app.use('/shop',shopRoute)
 app.use('/user',authRoute)
 app.use('/vendor',vendorRoute)
+app.use('/entry',buySellRoute)
+app.use('/cart',cartRoute)
+app.use('/buy',buyProductRoute)
+app.use('/rate',rateRoute)
 app.get('/', (req, res) => {
   res.render('index');
 });
