@@ -12,7 +12,7 @@ const userLogin=async(req, res)=> {
 }
 const getUsers = async (req, res) => {
     try {
-        const users = await AuthServices.getAllUsers();
+        const users = await AuthServices.getAllUser();
         return res.status(200).json({ msg: 'Users retrieved successfully', result: users });
     } catch (error) {
         console.error('Error in getting users:', error);
