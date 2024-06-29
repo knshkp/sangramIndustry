@@ -30,6 +30,11 @@ const userLogin=async(userData)=> {
 //     }); await userDetails.save();
 //     return userDetails
 // }
+const getAllUser=async()=>{
+    const user = await User.find({});
+    return user;
+
+}
 module.exports={
     userLogin
 }
