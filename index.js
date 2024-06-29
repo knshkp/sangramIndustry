@@ -6,6 +6,7 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 const cloudinary=require('cloudinary').v2
 cloudinary.config({
