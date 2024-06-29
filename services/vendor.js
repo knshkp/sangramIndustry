@@ -21,6 +21,11 @@ const addVendor = async (data) => {
             father_name: data.father_name,
             user_id: data.user_id,
             seller_phone: data.seller_phone,
+            address: data.address,
+            city: data.city,
+            state: data.state,
+            pincode: data.pincode,
+            upi:data.upi
         });
         
         // Save the new vendor to the database
