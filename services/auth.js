@@ -36,5 +36,6 @@ const getAllUser=async()=>{
 
 }
 module.exports={
-    userLogin
+    userLogin,
+    getAllUser
 }
