@@ -1,6 +1,6 @@
-const Vendor = require('../models/vendor');
+const Vendor = require('../models/employee');
 
-const addVendor = async (data) => {
+const addEmployee = async (data) => {
     try {
         // Check if a vendor with the same user_id already exists under the given seller_phone
         const existingVendor = await Vendor.findOne({
@@ -10,7 +10,7 @@ const addVendor = async (data) => {
         
         // If a vendor with the same user_id and seller_phone already exists, throw an error
         if (existingVendor) {
-            throw new Error(`A vendor with user_id ${data.user_id} already exists under phone number ${data.seller_phone}.`);
+            throw new Error(`A employee with user_id ${data.user_id} already exists under phone number ${data.seller_phone}.`);
         }
 
         // Create a new vendor using the provided data
@@ -39,7 +39,7 @@ const addVendor = async (data) => {
         throw error; // Re-throw the error to be handled by the caller
     }
 };
-const loginVendor=async(phone)=>{
+const loginEmployee=async(phone)=>{
     const vendorDetials=await Vendor.find({phone_number:phone})
     if (!vendorDetials){
         throw new Error(`Vendor with Phone ${phone} not found`);
@@ -47,7 +47,7 @@ const loginVendor=async(phone)=>{
     return vendorDetials
 }
 
-const removeVendor = async (vendorId) => {
+const removeEmployee = async (vendorId) => {
     try {
         // Find the vendor by ID and remove it
         const removedVendor = await Vendor.findByIdAndDelete(vendorId);
@@ -70,11 +70,11 @@ const removeVendor = async (vendorId) => {
 
 
 
-const getVendorDetails=async(userId)=> {
+const getEmployeeDetails=async(userId)=> {
     const vendorData = await Vendor.find({ seller_phone : userId });
     return vendorData
 }
 
 module.exports={
-    addVendor, getVendorDetails,removeVendor,loginVendor
+    addEmployee, getEmployeeDetails,removeEmployee,loginEmployee
 }

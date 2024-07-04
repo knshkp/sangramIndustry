@@ -23,6 +23,7 @@ const MONGODB_URI = `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@clust
 const shopRoute=require('./routes/shop_route')
 const authRoute = require('./routes/auth')
 const vendorRoute = require('./routes/vendor')
+const employeeRoute = require('./routes/employee')
 const buySellRoute=require('./routes/buy_sell_routes')
 const cartRoute=require('./routes/cart_route')
 const buyProductRoute=require('./routes/buy_product_routes')
@@ -44,6 +45,7 @@ app.use('/entry',buySellRoute)
 app.use('/cart',cartRoute)
 app.use('/buy',buyProductRoute)
 app.use('/rate',rateRoute)
+app.use('/employee',employeeRoute)
 app.get('/', (req, res) => {
   res.render('index');
 });
