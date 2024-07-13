@@ -71,7 +71,7 @@ const removeEmployee = async (vendorId) => {
 
 
 const getEmployeeDetails=async(userId)=> {
-    const vendorData = await Vendor.find({ phone : userId });
+    const vendorData = await Vendor.find({ seller_phone : userId });
     return vendorData
 }
 
