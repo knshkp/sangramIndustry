@@ -28,6 +28,7 @@ const buySellRoute=require('./routes/buy_sell_routes')
 const cartRoute=require('./routes/cart_route')
 const buyProductRoute=require('./routes/buy_product_routes')
 const rateRoute=require('./routes/rate_routes')
+const employeeServiceRoute=require('./routes/employee_ss_routes')
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -46,6 +47,7 @@ app.use('/cart',cartRoute)
 app.use('/buy',buyProductRoute)
 app.use('/rate',rateRoute)
 app.use('/employee',employeeRoute)
+app.use('/employee',employeeServiceRoute)
 app.get('/', (req, res) => {
   res.render('index');
 });
