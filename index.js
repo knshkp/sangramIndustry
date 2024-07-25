@@ -47,7 +47,8 @@ app.use('/cart',cartRoute)
 app.use('/buy',buyProductRoute)
 app.use('/rate',rateRoute)
 app.use('/employee',employeeRoute)
-app.use('/employee',employeeServiceRoute)
+app.use('/employeeServices',employeeServiceRoute)
+
 app.get('/', (req, res) => {
   res.render('index');
 });

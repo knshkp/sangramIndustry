@@ -1,10 +1,10 @@
-const EmployeeSSSchema = require('../models/employee_ss_model');
+const EmployeeSSchema = require('../models/employee_ss_model');
 
 const addEmployeeService = async (data) => {
     try {
 
         // Create a new vendor using the provided data
-        const newVendorDetails = new Vendor({
+        const newVendorDetails = new EmployeeSSchema({
             seller_phone: data?.seller_phone,
             customer_name: data?.customer_name,
             customer_phone: data?.customer_phone,
@@ -34,7 +34,7 @@ const addEmployeeService = async (data) => {
 
 
 const getEmployeeServiceDetails=async(userId)=> {
-    const vendorData = await Vendor.find({ seller_phone : userId });
+    const vendorData = await EmployeeSSchema.find({ seller_phone : userId });
     return vendorData
 }
 
