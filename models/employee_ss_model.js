@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var EmployeeSSSchema = new mongoose.Schema({
   seller_phone: { 
-    type: String,
+    type: Number,
     required: true
   },
   customer_phone: { 
@@ -20,7 +20,7 @@ var EmployeeSSSchema = new mongoose.Schema({
     type: String
   },
   product_name:{
-    type:Number
+    type:String
   },
   product_price:{
     type:String
