@@ -7,7 +7,7 @@ var EmployeeSSSchema = new mongoose.Schema({
   },
   customer_phone: { 
     type: Number,
-    unique:true
+    required:true
   },
   customer_name: { 
     type: String,
