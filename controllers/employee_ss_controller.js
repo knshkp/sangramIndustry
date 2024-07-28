@@ -26,7 +26,7 @@ const getEmployeeCompalint=async(req,res)=>{
     try{
         const data=req.query
         const complain=await EmployeeComplaint.getEmployeeComplainDetails(data)
-        return res.status(200).send({msg:'Getting COmpalint Successfully'})
+        return res.status(200).send({msg:'Getting COmpalint Successfully',result:complain})
     }
     catch(error){
         console.error('Error in getting Complaint', error);
