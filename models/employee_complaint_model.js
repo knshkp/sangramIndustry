@@ -43,6 +43,9 @@ var employeeComplaintSchema = new mongoose.Schema({
   completed_staff_time:{
     type:String
   },
+  description:{
+    type:String
+  }
 },
 { timestamps: true });
 
