@@ -17,7 +17,7 @@ const addEmployeeComplaint = async (data) => {
             completed_staff_date:data?.completed_staff_date,
             completed_staff_time:data?.completed_staff_time,
             description:data?.description,
-            status:status
+            status:data?.status
         });
         
         // Save the new vendor to the database
