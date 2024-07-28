@@ -22,6 +22,17 @@ const addEmployeeComplaint=async(req,res)=>{
         return res.status(500).json({ message: 'Failed to add complaint' });
     }
 }
+const updateEmployeeComplaint=async(req,res)=>{
+    try{
+        const data=req.body;
+        const complain=await EmployeeComplaint.updateEmployeeComplaintStatus(data)
+        return res.status(200).json({msg:'Complaint Updated Successfully',result:complain})
+    }
+    catch(error){
+        console.error('Error in Updating Complaint', error);
+        return res.status(500).json({ message: 'Failed to update complaint' });
+    }
+}
 const getEmployeeCompalint=async(req,res)=>{
     try{
         const data=req.query
@@ -46,5 +57,5 @@ const getEmployeeServiceDetails=async(req, res)=> {
 }
 
 module.exports={
-    addEmployee, getEmployeeServiceDetails,addEmployeeComplaint,getEmployeeCompalint
+    addEmployee, getEmployeeServiceDetails,addEmployeeComplaint,getEmployeeCompalint,updateEmployeeComplaint
 }

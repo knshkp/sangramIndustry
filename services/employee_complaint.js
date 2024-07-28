@@ -16,6 +16,8 @@ const addEmployeeComplaint = async (data) => {
             accept_staff_time: data?.accept_staff_time,
             completed_staff_date:data?.completed_staff_date,
             completed_staff_time:data?.completed_staff_time,
+            completed_staff_name:data?.completed_staff_name,
+            completed_staff_phone:data?.completted_staff_phone,
             description:data?.description,
             status:data?.status
         });
@@ -51,6 +53,35 @@ const removeEmployeeComplaint = async (vendorId) => {
         throw error; // You can throw the error to be handled by the caller
     }
 };
+const updateEmployeeComplaintStatus = async (data) => {
+    try {
+        // Find the complaint by ID and update the status and other fields
+        const updatedComplaint = await employeeComplaintSchema.findByIdAndUpdate(
+            data.complaintId,
+            {
+                status: data?.status,
+                accept_staff_name: data?.accept_staff_name,
+                accept_staff_phone: data?.accept_staff_phone,
+                accept_staff_date: data?.accept_staff_date,
+                accept_staff_time: data?.accept_staff_time,
+                completed_staff_date: data?.completed_staff_date,
+                completed_staff_time: data?.completed_staff_time,
+            },
+            { new: true } // Return the updated document
+        );
+
+        // Check if the complaint was found and updated
+        if (!updatedComplaint) {
+            throw new Error(`Complaint with ID ${complaintId} not found`);
+        }
+
+        // Return the updated complaint details
+        return updatedComplaint;
+    } catch (error) {
+        console.error('Error updating complaint status:', error);
+        throw error; // Re-throw the error to be handled by the caller
+    }
+};
 
 
 
@@ -61,5 +92,5 @@ const getEmployeeComplainDetails=async()=> {
 }
 
 module.exports={
-    addEmployeeComplaint,removeEmployeeComplaint, getEmployeeComplainDetails
+    addEmployeeComplaint,removeEmployeeComplaint, getEmployeeComplainDetails,updateEmployeeComplaintStatus
 }

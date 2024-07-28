@@ -43,6 +43,12 @@ var employeeComplaintSchema = new mongoose.Schema({
   completed_staff_time:{
     type:String
   },
+  completed_staff_name:{
+    type:String
+  },
+  completed_staff_phone:{
+    type:String
+  },
   description:{
     type:String
   },
