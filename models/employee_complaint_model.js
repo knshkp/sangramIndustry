@@ -54,6 +54,12 @@ var employeeComplaintSchema = new mongoose.Schema({
   },
   status:{
     type:String
+  },
+  group:{
+    type:String
+  },
+  subGroup:{
+    type:String
   }
 },
 { timestamps: true });
