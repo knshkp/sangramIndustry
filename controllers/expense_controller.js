@@ -1,6 +1,7 @@
 const expenseServices=require('../services/expense_services')
 const cloudinary=require('cloudinary')
 const addExpense=async(req,res)=>{
+    console.log(`>>>>>>>>>>>`,req.body)
     const cloudinaryUpload = await cloudinary.uploader.upload(req.file.path);
     try{
         var expense=req.body

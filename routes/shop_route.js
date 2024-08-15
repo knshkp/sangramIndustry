@@ -4,6 +4,7 @@ const multer = require("multer");
 const path = require("path");
 const bodyParser = require("body-parser");
 const shopController = require('../controllers/shop_controller');
+const ExpenseController=require('../controllers/expense_controller')
 const categoryController = require('../controllers/category_controller');
 
 shop_route.use(bodyParser.json());
@@ -57,6 +58,7 @@ shop_route.post('/add_banner', uploads.single('bannerImage'),shopController.addB
 shop_route.get('/remove_banner',shopController.removeBanner);
 shop_route.get('/get_banner',shopController.getBanner);
 shop_route.post('/add_product',uploads.single('productImage'), shopController.addProduct);
+shop_route.post('/addExpense',uploads.single('expenseImage'),ExpenseController.addExpense)
 shop_route.get('/get_product', shopController.getProduct);
 
 module.exports = shop_route;

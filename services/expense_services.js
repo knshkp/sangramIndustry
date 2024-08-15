@@ -2,7 +2,7 @@ const Expense=require("../models/expenses")
 const addExpense = async (productData,image) => {
     try {
         const expense = new Expense({
-            seller_phone: seller_phone,
+            seller_phone: productData.seller_phone,
             expense_type: productData.expense_type,
             mode_payment: productData.mode_payment,
             amount: productData.amount,
