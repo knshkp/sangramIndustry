@@ -43,7 +43,7 @@ const removeEmployeeComplaint = async (vendorId) => {
         
         // Check if a vendor was found and removed
         if (!removedVendor) {
-            // If no vendor was found with the provided ID, throw an error
+            // If no vendor was found with the provided ID, throw an error            
             throw new Error(`Complaint with ID ${vendorId} not found`);
         }
 
