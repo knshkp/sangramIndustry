@@ -53,7 +53,7 @@ shop_route.post('/add_category', upload.fields([
     { name: 'bannerImage', maxCount: 1 }
 ]), categoryController.addCategory);
 
-shop_route.get('/get_category', categoryController.getCategoryResult);
+shop_route.get('/get_category', categoryController.getCategory);
 shop_route.post('/add_banner', uploads.single('bannerImage'),shopController.addBanner);
 shop_route.get('/remove_banner',shopController.removeBanner);
 shop_route.get('/get_banner',shopController.getBanner);
