@@ -9,6 +9,19 @@ var EmployeeSSSchema = new mongoose.Schema({
     type: Number,
     required:true
   },
+  shop_name:{
+    type:String
+  },
+  customer_city:{
+    type:String
+  },
+  customer_state:{
+    type:String
+  },
+  customer_pincode:{
+    type:String
+  },
+  
   customer_name: { 
     type: String,
     required: true
