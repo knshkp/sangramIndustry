@@ -37,40 +37,50 @@ const addCart = async (req, res) => {
 };
 const removeCart = async (req, res) => {
     try {
+        const { phone, product_name, quantity } = req.body;
+
+        // Find the existing cart entry for the customer and product
         const existingCartEntry = await Cart.findOne({
-            customer_phone: req.body.phone,
-            product_name: req.body.product_name,
+            customer_phone: phone,
+            product_name: product_name,
         });
 
-        if (existingCartEntry) {
-            if (existingCartEntry.quantity > 1) {
-                // If quantity is greater than 1, decrement it
-                existingCartEntry.quantity -= parseInt(req.body.quantity, 10);
-                await existingCartEntry.save();
-                res.status(200).send({
-                    success: true,
-                    msg: 'Quantity decremented in the cart',
-                    data: existingCartEntry,
-                });
-            } else {
-                // If quantity is 1, remove the cart entry
-                await existingCartEntry.remove();
-                res.status(200).send({
-                    success: true,
-                    msg: 'Removed from the cart',
-                    data: existingCartEntry,
-                });
-            }
-        } else {
-            res.status(404).send({
+        if (!existingCartEntry) {
+            return res.status(404).send({
                 success: false,
                 msg: 'Product not found in the cart',
             });
         }
+
+        // Check if quantity needs to be decremented or the cart entry removed
+        const newQuantity = existingCartEntry.quantity - parseInt(quantity, 10);
+        if (newQuantity > 0) {
+            existingCartEntry.quantity = newQuantity;
+            await existingCartEntry.save();
+            return res.status(200).send({
+                success: true,
+                msg: 'Quantity decremented in the cart',
+                data: existingCartEntry,
+            });
+        } else {
+            // Use deleteOne to remove the cart entry
+            await Cart.deleteOne({ _id: existingCartEntry._id });
+            return res.status(200).send({
+                success: true,
+                msg: 'Product removed from the cart',
+                data: existingCartEntry,
+            });
+        }
     } catch (error) {
-        res.status(400).send({ success: false, msg: error.message });
+        // Handle unexpected errors
+        return res.status(500).send({
+            success: false,
+            msg: 'Internal server error',
+            error: error.message,
+        });
     }
 };
+
 const getCart=async(req,res)=>{
     try {
         const phone=req.query.phone;
