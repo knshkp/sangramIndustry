@@ -22,6 +22,7 @@ const addCart = async (req, res) => {
                 product_name: req.body.product_name,
                 price: req.body.price,
                 quantity: req.body.quantity,
+                image_link:req.body?.image_link
             });
 
             const cartData = await cart_obj.save();
