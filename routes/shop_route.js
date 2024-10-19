@@ -60,5 +60,6 @@ shop_route.get('/get_banner',shopController.getBanner);
 shop_route.post('/add_product',uploads.single('productImage'), shopController.addProduct);
 shop_route.post('/addExpense',uploads.single('expenseImage'),ExpenseController.addExpense)
 shop_route.get('/get_product', shopController.getProduct);
+shop_route.get('/remove_product/:id',shopController.removeProduct);
 
 module.exports = shop_route;

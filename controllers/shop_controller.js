@@ -28,6 +28,22 @@ const addProduct=async(req,res)=>{
         res.status(400).send({success:false,msg:error.message})
     }
 }
+const removeProduct = async (req, res) => {
+  const productId = req.params.id; // Assuming you're passing the product ID as a URL parameter
+  try {
+      // Delete the product from the database using the product ID
+      const removedProduct = await shopServices.removeProduct(productId);
+
+      if (removedProduct) {
+          res.status(200).send({ success: true, msg: "Product removed successfully", data: removedProduct });
+      } else {
+          res.status(404).send({ success: false, msg: "Product not found" });
+      }
+  } catch (error) {
+      res.status(500).send({ success: false, msg: error.message });
+  }
+};
+
 const getProduct = async (req, res) => {
     try {
         const result = await shopServices.getProduct();
@@ -83,5 +99,6 @@ module.exports={
     getProduct,
     addBanner,
     removeBanner,
-    getBanner
+    getBanner,
+    removeProduct
 }

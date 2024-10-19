@@ -21,6 +21,9 @@ const addProduct = async (productData,image) => {
         throw new Error(error.message);
     }
 };
+const removeProduct = async (productId) => {
+    return await Product.findByIdAndDelete(productId); // Assuming you're using Mongoose
+};
 const getProduct = async () => {
     try {
         const send_data = [];
@@ -39,7 +42,8 @@ const getProduct = async () => {
                             "product_price": cat_pro[j]['price'],
                             "discount": cat_pro[j]['discount'],
                             "description": cat_pro[j]['description'],
-                            "productImage": cat_pro[j]['product_image']
+                            "productImage": cat_pro[j]['product_image'],
+                            "product_id":cat_pro[j]['_id']
                         });
                     }
                 }
@@ -78,6 +82,7 @@ const searchProduct = async (search) => {
 module.exports={
     addProduct,
     getProduct,
-    searchProduct
+    searchProduct,
+    removeProduct
 
 }
