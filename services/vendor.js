@@ -2,18 +2,13 @@ const Vendor = require('../models/vendor');
 
 const addVendor = async (data) => {
     try {
-        // Check if a vendor with the same user_id already exists under the given seller_phone
         const existingVendor = await Vendor.findOne({
             user_id: data.user_id,
             seller_phone: data.seller_phone
         });
-        
-        // If a vendor with the same user_id and seller_phone already exists, throw an error
         if (existingVendor) {
             throw new Error(`A vendor with user_id ${data.user_id} already exists under phone number ${data.seller_phone}.`);
         }
-
-        // Create a new vendor using the provided data
         const newVendorDetails = new Vendor({
             vendor_name: data?.vendor_name,
             phone_number: data?.phone_number,
@@ -25,20 +20,43 @@ const addVendor = async (data) => {
             city: data?.city,
             state: data?.state,
             pincode: data?.pincode,
-            upi:data?.upi
+            upi:data?.upi,
+            kgRate:data?.kgRate!==undefined?data.kgRate:60,
+            fatRate:data?.fatRate!==undefined?data.fatRate:5,
+            fatSnf:data?.fatSnf!==undefined?data.fatSnf:6,
+            fatClr:data?.fatClr!==undefined?data.fatClr:7
         });
-        
-        // Save the new vendor to the database
         await newVendorDetails.save();
-
-        // Return the saved vendor details
         return newVendorDetails;
     } catch (error) {
-        // Handle any errors that occur during the process
         console.error('Error adding vendor:', error);
-        throw error; // Re-throw the error to be handled by the caller
+        throw error;
     }
 };
+const updateVendorByPhone = async (phoneNumber, seller_phone, updatedData) => {
+    try {
+        const vendor = await Vendor.findOne({ phone_number: phoneNumber, seller_phone: seller_phone });
+
+        if (!vendor) {
+            throw new Error(`Vendor with phone number ${phoneNumber} not found.`);
+        }
+
+        // Update the vendor's details only if the properties are not already present
+        for (const key in updatedData) {
+            if (!vendor[key]) { // Only add if the current vendor field is not already set
+                vendor[key] = updatedData[key];
+            }
+        }
+
+        await vendor.save();
+        return vendor;
+    } catch (error) {
+        console.error('Error updating vendor:', error);
+        throw error;
+    }
+};
+
+
 const loginVendor=async(phone)=>{
     const vendorDetials=await Vendor.find({phone_number:phone})
     if (!vendorDetials){
@@ -49,21 +67,14 @@ const loginVendor=async(phone)=>{
 
 const removeVendor = async (vendorId) => {
     try {
-        // Find the vendor by ID and remove it
         const removedVendor = await Vendor.findByIdAndDelete(vendorId);
-        
-        // Check if a vendor was found and removed
         if (!removedVendor) {
-            // If no vendor was found with the provided ID, throw an error
             throw new Error(`Vendor with ID ${vendorId} not found`);
         }
-
-        // Return the removed vendor details
         return removedVendor;
     } catch (error) {
-        // Handle any errors that occur during the process
         console.error('Error removing vendor:', error);
-        throw error; // You can throw the error to be handled by the caller
+        throw error;
     }
 };
 
@@ -76,5 +87,5 @@ const getVendorDetails=async(userId)=> {
 }
 
 module.exports={
-    addVendor, getVendorDetails,removeVendor,loginVendor
+    addVendor, getVendorDetails,removeVendor,loginVendor,updateVendorByPhone
 }

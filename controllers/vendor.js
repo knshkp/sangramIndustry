@@ -10,6 +10,17 @@ const addVendor=async(req, res)=> {
         return res.status(500).json({ message: 'Failed to add vendor' });
     }
 }
+const updateVendorByPhoneController = async (req, res) => {
+    const { phone_number,seller_phone } = req.query; 
+    const updatedData = req.body; 
+    try {
+        const updatedVendor = await VendorServices.updateVendorByPhone(phone_number,seller_phone, updatedData);
+        res.status(200).send({ success: true, msg: "Vendor updated successfully", data: updatedVendor });
+    } catch (error) {
+        res.status(400).send({ success: false, msg: error.message });
+    }
+};
+
 const removeVendor = async (req, res) => {
     try {
         // Assuming the vendor ID is passed in the request parameters
@@ -62,5 +73,5 @@ const getVendorDetails=async(req, res)=> {
 }
 
 module.exports={
-    addVendor, getVendorDetails,removeVendor,loginVendor
+    addVendor, getVendorDetails,removeVendor,loginVendor,updateVendorByPhoneController
 }

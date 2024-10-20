@@ -31,8 +31,9 @@ const addProduct=async(req,res)=>{
 const removeProduct = async (req, res) => {
   const productId = req.params.id; // Assuming you're passing the product ID as a URL parameter
   try {
-      // Delete the product from the database using the product ID
+      console.log(`>>>>>>>>>>`,productId);
       const removedProduct = await shopServices.removeProduct(productId);
+      console.log(removedProduct)
 
       if (removedProduct) {
           res.status(200).send({ success: true, msg: "Product removed successfully", data: removedProduct });
