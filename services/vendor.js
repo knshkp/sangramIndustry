@@ -41,12 +41,8 @@ const updateVendorByPhone = async (phoneNumber, seller_phone, updatedData) => {
             throw new Error(`Vendor with phone number ${phoneNumber} not found.`);
         }
 
-        // Update the vendor's details only if the properties are not already present
-        for (const key in updatedData) {
-            if (!vendor[key]) { // Only add if the current vendor field is not already set
-                vendor[key] = updatedData[key];
-            }
-        }
+        // Update the vendor's details with the new data
+        Object.assign(vendor, updatedData);
 
         await vendor.save();
         return vendor;
@@ -55,6 +51,7 @@ const updateVendorByPhone = async (phoneNumber, seller_phone, updatedData) => {
         throw error;
     }
 };
+
 
 
 const loginVendor=async(phone)=>{
