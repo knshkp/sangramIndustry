@@ -24,7 +24,8 @@ const addVendor = async (data) => {
             kgRate:data?.kgRate!==undefined?data.kgRate:60,
             fatRate:data?.fatRate!==undefined?data.fatRate:5,
             fatSnf:data?.fatSnf!==undefined?data.fatSnf:6,
-            fatClr:data?.fatClr!==undefined?data.fatClr:7
+            fatClr:data?.fatClr!==undefined?data.fatClr:7,
+            type:data?.type!==undefined?data.type:1
         });
         await newVendorDetails.save();
         return newVendorDetails;
