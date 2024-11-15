@@ -48,6 +48,9 @@ var vendorSchema = new mongoose.Schema({
   },
   fatClr:{
     type:String
+  },
+  type:{
+    type:String
   }
 },
 { timestamps: true });
