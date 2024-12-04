@@ -37,19 +37,10 @@ var vendorSchema = new mongoose.Schema({
   upi:{
     type:String
   },
-  kgRate:{
-    type:String
-  },
-  fatRate:{
-    type:String
-  },
-  fatSnf:{
-    type:String
-  },
-  fatClr:{
-    type:String
-  },
   type:{
+    type:String
+  },
+  type_rate:{
     type:String
   }
 },

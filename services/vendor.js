@@ -21,11 +21,8 @@ const addVendor = async (data) => {
             state: data?.state,
             pincode: data?.pincode,
             upi:data?.upi,
-            kgRate:data?.kgRate!==undefined?data.kgRate:60,
-            fatRate:data?.fatRate!==undefined?data.fatRate:5,
-            fatSnf:data?.fatSnf!==undefined?data.fatSnf:6,
-            fatClr:data?.fatClr!==undefined?data.fatClr:7,
-            type:data?.type!==undefined?data.type:1
+            type:data?.type!==undefined?data.type:1,
+            type_rate:data.type_rate
         });
         await newVendorDetails.save();
         return newVendorDetails;
