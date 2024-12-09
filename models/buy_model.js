@@ -35,6 +35,9 @@ const BuySchema = mongoose.Schema({
     fat_amount:{
         type:Number,
         required:true
+    },
+    date:{
+        type:String
     }
 });
 

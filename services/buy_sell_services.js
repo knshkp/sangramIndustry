@@ -11,7 +11,8 @@ const addBuyEntry=async(data)=> {
         milk_type : data.type,
         price : data.price,
         shift:data.shift,
-        fat_amount:data.fat_amount
+        fat_amount:data.fat_amount,
+        date:data.date
     }); await newDetails.save();
     return newDetails
 }
