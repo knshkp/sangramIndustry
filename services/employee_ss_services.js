@@ -15,10 +15,13 @@ const addEmployeeService = async (data) => {
             discount: data?.discount,
             final_price: data?.final_price,
             payment_method: data?.payment_method,
-            service_type:data?.service_type
+            service_type:data?.service_type,
+            shop_name:data?.shop_name,
+            customer_city:data?.customer_city,
+            customer_state:data?.customer_state,
+            customer_pincode:data?.customer_pincode
+
         });
-        
-        // Save the new vendor to the database
         await newVendorDetails.save();
 
         // Return the saved vendor details
@@ -37,6 +40,23 @@ const getEmployeeServiceDetails=async(userId)=> {
     const vendorData = await EmployeeSSchema.find({ seller_phone : userId });
     return vendorData
 }
+const getEmployeeService = async (phone) => {
+    try {
+        // Search for employees/vendors in the database based on the provided phone number
+        const employees = await EmployeeSSchema.find({ phone_number: phone });
+
+        if (!employees || employees.length === 0) {
+            throw new Error('No employees found with the given phone number.');
+        }
+
+        // Return the fetched employee details
+        return employees;
+    } catch (error) {
+        // Handle any errors that occur during the process
+        console.error('Error fetching employees:', error);
+        throw error; // Re-throw the error to be handled by the caller
+    }
+};
 
 module.exports={
     addEmployeeService,getEmployeeServiceDetails
