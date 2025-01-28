@@ -67,6 +67,29 @@ const removeEmployee = async (vendorId) => {
     }
 };
 
+const editEmployee = async (vendorId, updates) => {
+    try {
+        // Find the vendor by ID and update their details
+        const updatedVendor = await Vendor.findByIdAndUpdate(
+            vendorId, // The ID of the vendor to update
+            updates, // The updates to apply
+            { new: true, runValidators: true } // Options to return the updated document and validate changes
+        );
+
+        // Check if a vendor was found and updated
+        if (!updatedVendor) {
+            // If no vendor was found with the provided ID, throw an error
+            throw new Error(`Vendor with ID ${vendorId} not found`);
+        }
+
+        // Return the updated vendor details
+        return updatedVendor;
+    } catch (error) {
+        // Handle any errors that occur during the process
+        console.error('Error updating vendor details:', error);
+        throw error; // Throw the error to be handled by the caller
+    }
+};
 
 
 
@@ -76,5 +99,5 @@ const getEmployeeDetails=async(userId)=> {
 }
 
 module.exports={
-    addEmployee, getEmployeeDetails,removeEmployee,loginEmployee
+    addEmployee, getEmployeeDetails,removeEmployee,loginEmployee,editEmployee
 }

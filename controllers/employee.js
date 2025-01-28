@@ -3,11 +3,23 @@ const VendorServices = require('../services/employee')
 const addEmployee=async(req, res)=> {
     try {
         const data = req.body;
+        console.log(data)
         const vendor = await VendorServices.addEmployee(data);
         return res.status(200).json({msg : 'Vendor Added Successfully', result : vendor});
     } catch (error) {
         console.error('Error in adding vendor:', error);
         return res.status(500).json({ message: 'Failed to add vendor' });
+    }
+}
+const editEmployee=async(req, res)=> {
+    try {
+        const data = req.body;
+        console.log(data)
+        const vendor = await VendorServices.editEmployee(data);
+        return res.status(200).json({msg : 'Vendor Edited Successfully', result : vendor});
+    } catch (error) {
+        console.error('Error in editing vendor:', error);
+        return res.status(500).json({ message: 'Failed to Edit vendor' });
     }
 }
 const removeEmployee = async (req, res) => {
@@ -57,5 +69,5 @@ const getEmployeeDetails=async(req, res)=> {
 }
 
 module.exports={
-    addEmployee, getEmployeeDetails,removeEmployee,loginEmployee
+    addEmployee, getEmployeeDetails,removeEmployee,loginEmployee,editEmployee
 }
