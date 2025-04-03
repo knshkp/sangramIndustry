@@ -1,5 +1,5 @@
 const EmployeeSSchema = require('../models/employee_ss_model');
-
+const MarketingSchema=require("../models/marketing_mopdel")
 const addEmployeeService = async (data) => {
     try {
 
@@ -33,6 +33,35 @@ const addEmployeeService = async (data) => {
     }
 };
 
+const addMarketingService = async (data) => {
+    try {
+
+        // Create a new vendor using the provided data
+        const newMarketingEntry = new MarketingSchema({
+            staff_phone: data?.staff_phone,
+            customer_name: data?.customer_name,
+            customer_phone: data?.customer_phone,
+            customer_address: data?.customer_address,
+            category_name: data?.category_name,
+            shop_name:data?.shop_name,
+            customer_address:data?.customer_address,
+            customer_city:data?.customer_city,
+            customer_state:data?.customer_state,
+            customer_pincode:data?.customer_pincode,
+            customer_location:data?.customer_location,
+            shop_photo:data?.shop_photo
+
+        });
+        await newMarketingEntry.save();
+
+        // Return the saved vendor details
+        return newMarketingEntry;
+    } catch (error) {
+        // Handle any errors that occur during the process
+        console.error('Error adding vendor:', error);
+        throw error; // Re-throw the error to be handled by the caller
+    }
+};
 
 
 
@@ -59,5 +88,5 @@ const getEmployeeService = async (phone) => {
 };
 
 module.exports={
-    addEmployeeService,getEmployeeServiceDetails
+    addEmployeeService,getEmployeeServiceDetails,addMarketingService
 }

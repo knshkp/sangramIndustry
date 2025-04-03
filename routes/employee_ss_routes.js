@@ -7,4 +7,5 @@ router.post('/addEmplohyeeComplaint',VendorControllers.addEmployeeComplaint)
 router.post('/updateEmployeeComplaint',VendorControllers.updateEmployeeComplaint)
 router.get('/getEmployeeComplaint',VendorControllers.getEmployeeCompalint)
 router.get(`/getEmployee`, VendorControllers.getEmployeeServiceDetails)
+router.post('/addMarketingEntry',VendorControllers.addMarketingEntry)
 module.exports = router;

@@ -1,6 +1,5 @@
 const VendorServices = require('../services/employee_ss_services')
 const EmployeeComplaint=require('../services/employee_complaint')
-
 const addEmployee=async(req, res)=> {
     try {
         const data = req.body;
@@ -55,7 +54,16 @@ const getEmployeeServiceDetails=async(req, res)=> {
         return res.status(500).json({ message: 'Failed to get services details' });
     }
 }
-
+const addMarketingEntry=async(req, res)=> {
+    try {
+        const data = req.body;
+        const vendor = await VendorServices.addMarketingService(data);
+        return res.status(200).json({msg : 'Entry Added Successfully', result : vendor});
+    } catch (error) {
+        console.error('Error in adding marketing Entry:', error);
+        return res.status(500).json({ message: 'Failed to add entry' });
+    }
+}
 module.exports={
-    addEmployee, getEmployeeServiceDetails,addEmployeeComplaint,getEmployeeCompalint,updateEmployeeComplaint
+    addEmployee, getEmployeeServiceDetails,addEmployeeComplaint,getEmployeeCompalint,updateEmployeeComplaint,addMarketingEntry
 }
