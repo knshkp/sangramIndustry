@@ -1,27 +1,56 @@
 const EmployeeSSchema = require('../models/employee_ss_model');
 const MarketingSchema=require("../models/marketing_mopdel")
-const addEmployeeService = async (data) => {
+const addEmployeeService = async (data,file) => {
     try {
 
         // Create a new vendor using the provided data
-        const newVendorDetails = new EmployeeSSchema({
-            seller_phone: data?.seller_phone,
-            customer_name: data?.customer_name,
-            customer_phone: data?.customer_phone,
-            customer_address: data?.customer_address,
-            category_name: data?.category_name,
-            product_name: data?.product_name,
-            product_price: data?.product_price,
-            discount: data?.discount,
-            final_price: data?.final_price,
-            payment_method: data?.payment_method,
-            service_type:data?.service_type,
-            shop_name:data?.shop_name,
-            customer_city:data?.customer_city,
-            customer_state:data?.customer_state,
-            customer_pincode:data?.customer_pincode
+        let newVendorDetails=""
+        if(file!=""){
+            newVendorDetails = new EmployeeSSchema({
+                seller_phone: data?.seller_phone,
+                customer_name: data?.customer_name,
+                customer_phone: data?.customer_phone,
+                customer_address: data?.customer_address,
+                category_name: data?.category_name,
+                product_name: data?.product_name,
+                product_price: data?.product_price,
+                discount: data?.discount,
+                final_price: data?.final_price,
+                payment_method: data?.payment_method,
+                service_type:data?.service_type,
+                shop_name:data?.shop_name,
+                customer_city:data?.customer_city,
+                customer_state:data?.customer_state,
+                customer_pincode:data?.customer_pincode,
+                customer_latitude:data.customer_latitude,
+                shop_photo:file,
+                customer_longitude:data?.customer_longitude
+    
+            });
+        }
+        else{
+            newVendorDetails = new EmployeeSSchema({
+                seller_phone: data?.seller_phone,
+                customer_name: data?.customer_name,
+                customer_phone: data?.customer_phone,
+                customer_address: data?.customer_address,
+                category_name: data?.category_name,
+                product_name: data?.product_name,
+                product_price: data?.product_price,
+                discount: data?.discount,
+                final_price: data?.final_price,
+                payment_method: data?.payment_method,
+                service_type:data?.service_type,
+                shop_name:data?.shop_name,
+                customer_city:data?.customer_city,
+                customer_state:data?.customer_state,
+                customer_pincode:data?.customer_pincode,
+                customer_location:data.customer_location,
+                shop_photo:data.shop_photo
+    
+            });
+        }
 
-        });
         await newVendorDetails.save();
 
         // Return the saved vendor details
