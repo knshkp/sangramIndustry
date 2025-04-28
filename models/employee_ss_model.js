@@ -49,6 +49,15 @@ var EmployeeSSSchema = new mongoose.Schema({
   },
   service_type:{
     type:String
+  },
+  customer_latitude:{
+    type:Number
+  },
+  customer_longitude:{
+    type:Number
+  },
+  shop_photo:{
+    type:String
   }
 },
 { timestamps: true });

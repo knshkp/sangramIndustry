@@ -6,6 +6,7 @@ const addRate=async(req, res)=> {
         const rate = await RateServices.addRate(data);
         return res.status(200).json({msg : 'Rate Added Successfully', result : rate});
     } catch (error) {
+        
         console.error('Error in adding rate:', error);
         return res.status(500).json({ message: 'Failed to add rate' });
     }

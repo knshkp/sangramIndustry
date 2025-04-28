@@ -1,10 +1,18 @@
 const VendorServices = require('../services/employee_ss_services')
 const EmployeeComplaint=require('../services/employee_complaint')
-
+const cloudinary=require('cloudinary')
 const addEmployee=async(req, res)=> {
     try {
+        console.log(">>>>>>>>fiulepath"+req.file?.path);
+        console.log(">>>>>>>>body is>>>>>"+JSON.stringify(req.body));
+        
+        let file="";
+        if(req?.file?.path){
+            const cloudinaryUpload = await cloudinary.uploader.upload(req.file.path);
+            file=cloudinaryUpload.secure_url
+        }
         const data = req.body;
-        const vendor = await VendorServices.addEmployeeService(data);
+        const vendor = await VendorServices.addEmployeeService(data,file);
         return res.status(200).json({msg : 'Service Added Successfully', result : vendor});
     } catch (error) {
         console.error('Error in adding service:', error);
@@ -55,7 +63,16 @@ const getEmployeeServiceDetails=async(req, res)=> {
         return res.status(500).json({ message: 'Failed to get services details' });
     }
 }
-
+const addMarketingEntry=async(req, res)=> {
+    try {
+        const data = req.body;
+        const vendor = await VendorServices.addMarketingService(data);
+        return res.status(200).json({msg : 'Entry Added Successfully', result : vendor});
+    } catch (error) {
+        console.error('Error in adding marketing Entry:', error);
+        return res.status(500).json({ message: 'Failed to add entry' });
+    }
+}
 module.exports={
-    addEmployee, getEmployeeServiceDetails,addEmployeeComplaint,getEmployeeCompalint,updateEmployeeComplaint
+    addEmployee, getEmployeeServiceDetails,addEmployeeComplaint,getEmployeeCompalint,updateEmployeeComplaint,addMarketingEntry
 }
