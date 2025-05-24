@@ -71,3 +71,42 @@ exports.markAttendance = async (req, res) => {
     res.status(500).json({ message: 'Server error', error });
   }
 };
+// GET /employee/attendance/:phone
+exports.getEmployeeAttendance = async (req, res) => {
+  try {
+    const { phone } = req.params;
+
+    if (!phone) {
+      return res.status(400).json({ message: 'Phone number is required.' });
+    }
+
+    const records = await Attendance.find({ staff_phone: phone }).sort({ date: -1 });
+
+    if (!records.length) {
+      return res.status(404).json({ message: 'No attendance records found for this employee.' });
+    }
+
+    return res.status(200).json({ message: 'Attendance records found.', data: records });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error', error });
+  }
+};
+
+// GET /employee/attendance
+exports.getAllAttendance = async (req, res) => {
+  try {
+    const records = await Attendance.find().sort({ date: -1 });
+
+    if (!records.length) {
+      return res.status(404).json({ message: 'No attendance records found.' });
+    }
+
+    return res.status(200).json({ message: 'All attendance records retrieved.', data: records });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error', error });
+  }
+};

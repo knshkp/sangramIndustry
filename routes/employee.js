@@ -11,4 +11,6 @@ router.get(`/removeEmployee`, VendorControllers.removeEmployee)
 router.post('/addExpense',ExpenseController.addExpense)
 router.get('/getExpense',ExpenseController.getExpense)
 router.post('/addAttendance', AttendanceControllers.markAttendance);
+router.get('/attendance/:phone', AttendanceControllers.getEmployeeAttendance);
+router.get('/attendance', AttendanceControllers.getAllAttendance);
 module.exports = router;
